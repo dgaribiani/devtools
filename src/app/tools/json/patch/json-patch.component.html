@@ -1,0 +1,39 @@
+<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">JSON Patch (RFC 6902)</div>
+      <div class="tool-subtitle">Generate patches between JSON documents or apply patches.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="generatePatch()">
+        <mat-icon>difference</mat-icon>
+        Generate Patch
+      </button>
+      <button mat-raised-button color="accent" type="button" (click)="applyPatch()">
+        <mat-icon>play_arrow</mat-icon>
+        Apply Patch
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">code</span>Base JSON</div>
+      <app-editor [value]="baseInput" (valueChange)="baseInput = $event" [language]="'json'" height="220px"></app-editor>
+      <div class="chip"><span class="material-icons">target</span>Target JSON</div>
+      <app-editor [value]="targetInput" (valueChange)="targetInput = $event" [language]="'json'" height="220px"></app-editor>
+      <div class="chip"><span class="material-icons">auto_fix_high</span>Patch</div>
+      <app-editor [value]="patchInput" (valueChange)="patchInput = $event" [language]="'json'" height="220px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">task</span>Output</div>
+      <app-result-panel
+        [value]="output"
+        [language]="'json'"
+        filename="json-patch-output.json"
+        emptyHint="Generate or apply a patch to see output."></app-result-panel>
+    </div>
+  </div>
+</div>

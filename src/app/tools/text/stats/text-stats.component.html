@@ -1,0 +1,55 @@
+﻿<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">Text Editor + Counter</div>
+      <div class="tool-subtitle">Type or paste text and get character, line, and line-ending stats.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="recount()">
+        <mat-icon>refresh</mat-icon>
+        Recount
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">edit</span>Text</div>
+      <app-editor [value]="input" (valueChange)="onInputChange($event)" [language]="'text'" height="320px"></app-editor>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">insights</span>Counts</div>
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="label">Characters</div>
+          <div class="value">{{ stats.chars }}</div>
+        </div>
+        <div class="stat">
+          <div class="label">Characters (no whitespace)</div>
+          <div class="value">{{ stats.charsNoWhitespace }}</div>
+        </div>
+        <div class="stat">
+          <div class="label">Words</div>
+          <div class="value">{{ stats.words }}</div>
+        </div>
+        <div class="stat">
+          <div class="label">Lines</div>
+          <div class="value">{{ stats.lines }}</div>
+        </div>
+        <div class="stat">
+          <div class="label">Bytes (UTF-8)</div>
+          <div class="value">{{ stats.bytes }}</div>
+        </div>
+      </div>
+
+      <div class="chip"><span class="material-icons">segment</span>Line Endings</div>
+      <div class="line-endings">
+        <div class="ending"><span>CRLF (\r\n)</span><strong>{{ stats.crlf }}</strong></div>
+        <div class="ending"><span>LF (\n)</span><strong>{{ stats.lf }}</strong></div>
+        <div class="ending"><span>CR (\r)</span><strong>{{ stats.cr }}</strong></div>
+      </div>
+      <div class="muted">Line endings are counted explicitly; Lines = CRLF + LF + CR + 1 (if text not empty).</div>
+    </div>
+  </div>
+</div>

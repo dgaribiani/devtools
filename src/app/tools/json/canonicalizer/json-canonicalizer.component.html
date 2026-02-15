@@ -1,0 +1,29 @@
+﻿<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">JSON Canonicalizer / Sort Keys</div>
+      <div class="tool-subtitle">Deterministic JSON output with optional deep key sorting.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="run()">
+        <mat-icon>sort</mat-icon>
+        Canonicalize
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">tune</span>Options</div>
+      <mat-slide-toggle [(ngModel)]="sortKeys">Sort keys recursively</mat-slide-toggle>
+      <mat-slide-toggle [(ngModel)]="preserveArrayOrder">Preserve array order</mat-slide-toggle>
+      <div class="chip"><span class="material-icons">code</span>Input JSON</div>
+      <app-editor [value]="input" (valueChange)="input = $event" [language]="'json'" height="300px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">task</span>Canonical Output</div>
+      <app-result-panel [value]="output" [language]="'json'" filename="canonical.json"></app-result-panel>
+    </div>
+  </div>
+</div>

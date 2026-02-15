@@ -1,0 +1,49 @@
+<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">Cron Next Run</div>
+      <div class="tool-subtitle">Compute upcoming runs for a 5-field cron expression (min hour dom mon dow).</div>
+    </div>
+    <div class="tool-actions">
+      <mat-form-field appearance="outline" class="count-field">
+        <mat-label>Count</mat-label>
+        <input matInput type="number" min="1" max="10" [(ngModel)]="count">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button" (click)="run()">
+        <mat-icon>schedule</mat-icon>
+        Calculate
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">edit</span>Expression</div>
+      <mat-form-field appearance="outline">
+        <mat-label>Cron</mat-label>
+        <input matInput [(ngModel)]="expression" placeholder="*/5 * * * *">
+      </mat-form-field>
+
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Base date/time</mat-label>
+          <input matInput type="datetime-local" [(ngModel)]="baseDateInput">
+        </mat-form-field>
+        <mat-slide-toggle [(ngModel)]="useUtc">Use UTC</mat-slide-toggle>
+      </div>
+
+      <div class="hint muted">If both day-of-month and day-of-week are set, this tool matches either.</div>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">event</span>Next Runs</div>
+      <div class="results" *ngIf="results.length; else empty">
+        <div class="result" *ngFor="let item of results">{{ item }}</div>
+      </div>
+      <ng-template #empty>
+        <div class="muted">Calculate to see the next run times.</div>
+      </ng-template>
+    </div>
+  </div>
+</div>

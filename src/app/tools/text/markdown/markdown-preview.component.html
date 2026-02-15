@@ -1,0 +1,33 @@
+<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">Markdown Preview</div>
+      <div class="tool-subtitle">Render markdown locally with sanitized HTML.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="render()">
+        <mat-icon>visibility</mat-icon>
+        Render
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">edit</span>Markdown</div>
+      <app-editor [value]="input" (valueChange)="input = $event" [language]="'text'" height="320px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">preview</span>Preview</div>
+      <div class="preview" [innerHTML]="preview"></div>
+      <div class="chip"><span class="material-icons">code</span>HTML</div>
+      <app-result-panel
+        [value]="htmlOutput"
+        [language]="'text'"
+        filename="markdown.html"
+        emptyHint="Render markdown to see HTML output."></app-result-panel>
+    </div>
+  </div>
+</div>

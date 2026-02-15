@@ -1,0 +1,39 @@
+﻿<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">JSON Schema Validator</div>
+      <div class="tool-subtitle">Validate JSON payloads against a schema using AJV.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="run()">
+        <mat-icon>fact_check</mat-icon>
+        Validate
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">rule</span>Schema</div>
+      <app-editor [value]="schemaInput" (valueChange)="schemaInput = $event" [language]="'json'" height="300px"></app-editor>
+    </div>
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">code</span>JSON Data</div>
+      <app-editor [value]="jsonInput" (valueChange)="jsonInput = $event" [language]="'json'" height="300px"></app-editor>
+    </div>
+  </div>
+
+  <div class="tool-panel glass-card">
+    <div class="chip"><span class="material-icons">verified</span>Validation Result</div>
+    <div *ngIf="valid === true" class="result success">JSON is valid ✅</div>
+    <div *ngIf="valid === false" class="result error">JSON does not match the schema.</div>
+    <div class="error" *ngIf="error">{{ error }}</div>
+
+    <div class="errors" *ngIf="errors.length">
+      <div class="error-row" *ngFor="let err of errors">
+        <div class="path">{{ err.instancePath || '/' }}</div>
+        <div class="message">{{ err.message }}</div>
+      </div>
+    </div>
+  </div>
+</div>

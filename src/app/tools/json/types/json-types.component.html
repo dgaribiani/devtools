@@ -1,0 +1,40 @@
+<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">JSON ? Types</div>
+      <div class="tool-subtitle">Generate basic type definitions from JSON.</div>
+    </div>
+    <div class="tool-actions">
+      <mat-form-field appearance="outline">
+        <mat-label>Language</mat-label>
+        <mat-select [(ngModel)]="language">
+          <mat-option value="typescript">TypeScript</mat-option>
+          <mat-option value="go">Go</mat-option>
+          <mat-option value="rust">Rust</mat-option>
+          <mat-option value="kotlin">Kotlin</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button" (click)="generate()">
+        <mat-icon>schema</mat-icon>
+        Generate
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">code</span>Input JSON</div>
+      <app-editor [value]="input" (valueChange)="input = $event" [language]="'json'" height="320px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">integration_instructions</span>Generated Types</div>
+      <app-result-panel
+        [value]="output"
+        [language]="'text'"
+        filename="types.txt"
+        emptyHint="Generate types to see output."></app-result-panel>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+﻿<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">Timestamp Converter</div>
+      <div class="tool-subtitle">Convert Unix timestamps and human-readable dates.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-stroked-button type="button" (click)="convertDate()">
+        <mat-icon>schedule</mat-icon>
+        Date → Timestamp
+      </button>
+      <button mat-raised-button color="primary" type="button" (click)="convertTimestamp()">
+        <mat-icon>update</mat-icon>
+        Timestamp → Date
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">timer</span>Unix Timestamp</div>
+      <mat-form-field appearance="outline">
+        <mat-label>Timestamp (seconds or ms)</mat-label>
+        <input matInput [(ngModel)]="timestampInput" />
+      </mat-form-field>
+      <div class="muted">Enter seconds (10 digits) or milliseconds (13 digits).</div>
+    </div>
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">event</span>Human Date</div>
+      <mat-form-field appearance="outline">
+        <mat-label>Date & Time (local)</mat-label>
+        <input matInput type="datetime-local" [(ngModel)]="dateInput" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="tool-panel glass-card">
+    <div class="chip"><span class="material-icons">task</span>Result</div>
+    <div *ngIf="result" class="result-grid">
+      <div class="result-item">
+        <div class="label">Epoch (ms)</div>
+        <div class="value">{{ result.epochMs }}</div>
+      </div>
+      <div class="result-item">
+        <div class="label">Epoch (s)</div>
+        <div class="value">{{ (result.epochMs / 1000) | number:'1.0-0' }}</div>
+      </div>
+      <div class="result-item">
+        <div class="label">Local</div>
+        <div class="value">{{ result.local }}</div>
+      </div>
+      <div class="result-item">
+        <div class="label">UTC</div>
+        <div class="value">{{ result.utc }}</div>
+      </div>
+    </div>
+    <div class="error" *ngIf="error">{{ error }}</div>
+  </div>
+</div>

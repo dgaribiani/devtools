@@ -1,0 +1,78 @@
+.summary {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.note {
+  background: rgba(255, 196, 0, 0.15);
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.tree {
+  margin-top: 10px;
+}
+
+.tree-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 140px;
+  gap: 12px;
+  align-items: start;
+}
+
+.tree-main {
+  min-width: 0;
+}
+
+.tree-mini {
+  position: sticky;
+  top: 12px;
+  padding: 8px;
+  border-radius: 12px;
+  background: rgba(47, 215, 255, 0.1);
+}
+
+.mini-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+}
+
+.mini-map {
+  width: 100%;
+  display: block;
+}
+
+.mini-map rect {
+  fill: rgba(47, 215, 255, 0.5);
+}
+
+.mini-note {
+  margin-top: 6px;
+  font-size: 11px;
+}
+
+.error {
+  color: #f97316;
+  font-size: 12px;
+}
+
+@media (max-width: 1000px) {
+  .tree-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tree-mini {
+    position: static;
+  }
+}

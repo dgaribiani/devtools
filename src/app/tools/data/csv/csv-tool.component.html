@@ -1,0 +1,47 @@
+﻿<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">CSV <-> JSON Converter</div>
+      <div class="tool-subtitle">Convert tabular data between CSV and JSON arrays.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-stroked-button type="button" (click)="toCsv()">
+        <mat-icon>sync_alt</mat-icon>
+        JSON → CSV
+      </button>
+      <button mat-raised-button color="primary" type="button" (click)="toJson()">
+        <mat-icon>sync_alt</mat-icon>
+        CSV → JSON
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-panel glass-card">
+    <div class="options">
+      <mat-form-field appearance="outline">
+        <mat-label>Delimiter</mat-label>
+        <input matInput [(ngModel)]="delimiter" placeholder="," />
+      </mat-form-field>
+      <mat-slide-toggle [(ngModel)]="header">Headers included</mat-slide-toggle>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="panel-header">
+        <div class="chip"><span class="material-icons">table_chart</span>CSV</div>
+        <app-toolbar-buttons [text]="csvInput" filename="data.csv"></app-toolbar-buttons>
+      </div>
+      <app-editor [value]="csvInput" (valueChange)="csvInput = $event" [language]="'text'" height="280px"></app-editor>
+    </div>
+    <div class="tool-panel glass-card">
+      <div class="panel-header">
+        <div class="chip"><span class="material-icons">data_object</span>JSON</div>
+        <app-toolbar-buttons [text]="jsonInput" filename="data.json"></app-toolbar-buttons>
+      </div>
+      <app-editor [value]="jsonInput" (valueChange)="jsonInput = $event" [language]="'json'" height="280px"></app-editor>
+    </div>
+  </div>
+
+  <div class="error" *ngIf="error">{{ error }}</div>
+</div>

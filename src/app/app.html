@@ -1,0 +1,80 @@
+﻿<div class="app-shell">
+  <header class="app-header glass-card">
+    <div class="header-left">
+      <button class="icon-button" type="button" (click)="toggleSidebar()" aria-label="Toggle sidebar">
+        <span class="material-icons">menu</span>
+      </button>
+      <div class="brand">
+        <span class="material-icons">extension</span>
+        <div>
+          <div class="brand-title">Dev Toolbox</div>
+          <div class="brand-subtitle muted">Privacy-first developer utilities</div>
+        </div>
+      </div>
+    </div>
+    <div class="header-search" (click)="openPalette()">
+      <span class="material-icons">search</span>
+      <input type="text" placeholder="Search tools" aria-label="Search tools" readonly (focus)="openPalette()">
+      <span class="shortcut">Ctrl/Cmd+K</span>
+    </div>
+    <div class="header-actions">
+      <button mat-icon-button type="button" (click)="toggleTheme()" aria-label="Toggle theme">
+        <mat-icon>{{ theme.mode() === 'dark' ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      </button>
+      <a class="privacy-link" routerLink="/privacy">Privacy</a>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <aside class="sidebar app-scrollbar" [class.sidebar-open]="sidebarOpen()">
+      <div class="sidebar-search">
+        <span class="material-icons">filter_list</span>
+        <input
+          type="text"
+          placeholder="Filter tools"
+          [ngModel]="sidebarQuery()"
+          (ngModelChange)="sidebarQuery.set($event)"
+          aria-label="Filter tools">
+      </div>
+
+      <div class="sidebar-section" *ngFor="let category of filteredCategories()">
+        <div class="sidebar-title">{{ category.label }}</div>
+        <a
+          class="sidebar-link"
+          *ngFor="let tool of category.tools"
+          [routerLink]="tool.route"
+          routerLinkActive="active">
+          <span>{{ tool.label }}</span>
+          <span class="muted">{{ tool.description }}</span>
+        </a>
+      </div>
+
+      <div class="sidebar-footer">
+        <mat-slide-toggle
+          [checked]="settings.settings().rememberInputs"
+          (change)="toggleRemember($event.checked)">
+          Remember my inputs
+        </mat-slide-toggle>
+        <div class="muted">Stored locally on this device.</div>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <div class="route-animate" [@routeAnimations]="outlet.activatedRouteData['animation']">
+        <router-outlet #outlet="outlet"></router-outlet>
+      </div>
+    </main>
+
+    <aside class="right-panel">
+      <app-ad-slot></app-ad-slot>
+    </aside>
+  </div>
+
+  <footer class="app-footer">
+    <div>All processing happens locally in your browser.</div>
+    <div class="muted">Shortcuts: Ctrl/Cmd+Enter to run, Ctrl/Cmd+K to search.</div>
+  </footer>
+
+  <app-command-palette [open]="paletteOpen()" (close)="closePalette()"></app-command-palette>
+  <app-toast-container></app-toast-container>
+</div>

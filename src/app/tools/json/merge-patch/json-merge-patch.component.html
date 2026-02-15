@@ -1,0 +1,33 @@
+<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">JSON Merge Patch (RFC 7396)</div>
+      <div class="tool-subtitle">Apply a merge patch by overwriting fields and deleting with nulls.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="apply()">
+        <mat-icon>playlist_add_check</mat-icon>
+        Apply Patch
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">code</span>Base JSON</div>
+      <app-editor [value]="baseInput" (valueChange)="baseInput = $event" [language]="'json'" height="240px"></app-editor>
+      <div class="chip"><span class="material-icons">edit</span>Patch JSON</div>
+      <app-editor [value]="patchInput" (valueChange)="patchInput = $event" [language]="'json'" height="240px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">task</span>Output</div>
+      <app-result-panel
+        [value]="output"
+        [language]="'json'"
+        filename="json-merge-patch-output.json"
+        emptyHint="Apply the patch to see output."></app-result-panel>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">Timezone Converter</div>
+      <div class="tool-subtitle">Convert a local time between two IANA timezones.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="convert()">
+        <mat-icon>swap_horiz</mat-icon>
+        Convert
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">public</span>Input</div>
+      <mat-form-field appearance="outline">
+        <mat-label>Date & time</mat-label>
+        <input matInput type="datetime-local" [(ngModel)]="dateInput">
+      </mat-form-field>
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>From timezone</mat-label>
+          <mat-select [(ngModel)]="sourceZone">
+            <mat-option *ngFor="let zone of timezones" [value]="zone">{{ zone }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>To timezone</mat-label>
+          <mat-select [(ngModel)]="targetZone">
+            <mat-option *ngFor="let zone of timezones" [value]="zone">{{ zone }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">schedule</span>Result</div>
+      <div class="results" *ngIf="result as res; else empty">
+        <div class="result"><strong>Source:</strong> {{ res.sourceLabel }} ({{ sourceZone }})</div>
+        <div class="result"><strong>Target:</strong> {{ res.targetLabel }} ({{ targetZone }})</div>
+        <div class="result"><strong>UTC:</strong> {{ utcLabel }} (UTC)</div>
+        <div class="result"><strong>ISO:</strong> {{ res.utc.toISOString() }}</div>
+      </div>
+      <ng-template #empty>
+        <div class="muted">Convert to see the timezone output.</div>
+      </ng-template>
+    </div>
+  </div>
+</div>

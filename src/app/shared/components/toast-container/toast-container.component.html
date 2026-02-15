@@ -1,0 +1,16 @@
+﻿<div class="toast-container" aria-live="polite">
+  <div
+    class="toast"
+    *ngFor="let item of toast.toasts()"
+    [class.toast-success]="item.type === 'success'"
+    [class.toast-error]="item.type === 'error'"
+    [class.toast-info]="item.type === 'info'">
+    <div class="toast-icon material-icons">
+      {{ item.type === 'success' ? 'check_circle' : item.type === 'error' ? 'error' : 'info' }}
+    </div>
+    <div class="toast-message">{{ item.message }}</div>
+    <button class="toast-close" type="button" (click)="toast.dismiss(item.id)">
+      <span class="material-icons">close</span>
+    </button>
+  </div>
+</div>

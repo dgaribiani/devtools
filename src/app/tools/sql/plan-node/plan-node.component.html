@@ -1,0 +1,24 @@
+<div class="node" [style.marginLeft.px]="depth * 8">
+  <div class="node-header">
+    <button
+      class="toggle"
+      type="button"
+      (click)="toggle()"
+      *ngIf="node.children.length"
+      [attr.aria-label]="collapsed ? 'Expand node' : 'Collapse node'">
+      <span class="material-icons">{{ collapsed ? 'chevron_right' : 'expand_more' }}</span>
+    </button>
+    <div class="node-title">{{ node.name }}</div>
+    <div class="node-detail" *ngIf="node.detail">{{ node.detail }}</div>
+    <div class="node-metrics">
+      <span *ngIf="node.cost !== undefined">Cost: {{ node.cost }}</span>
+      <span *ngIf="node.rows !== undefined">Rows: {{ node.rows }}</span>
+      <span *ngIf="node.actualTime !== undefined">Time: {{ node.actualTime }} ms</span>
+      <span *ngIf="node.actualRows !== undefined">Actual rows: {{ node.actualRows }}</span>
+      <span *ngIf="node.loops !== undefined">Loops: {{ node.loops }}</span>
+    </div>
+  </div>
+  <div class="node-children" *ngIf="node.children.length && !collapsed">
+    <app-plan-node *ngFor="let child of node.children" [node]="child" [depth]="depth + 1"></app-plan-node>
+  </div>
+</div>

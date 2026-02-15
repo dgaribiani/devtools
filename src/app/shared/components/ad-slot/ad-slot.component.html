@@ -1,0 +1,19 @@
+﻿<div class="ad-slot glass-card">
+  <div class="ad-header">
+    <div class="title">
+      <span class="material-icons">favorite</span>
+      <span>Ads help keep this free</span>
+    </div>
+    <button mat-icon-button type="button" (click)="expanded = !expanded" aria-label="Toggle ad">
+      <mat-icon>{{ expanded ? 'expand_less' : 'expand_more' }}</mat-icon>
+    </button>
+  </div>
+  <div class="ad-body" *ngIf="expanded">
+    <div class="placeholder">
+      <div class="box"></div>
+      <div class="placeholder-title">Sponsor spot (320x100)</div>
+      <div class="muted">No tracking, no popups, just a small ad card.</div>
+    </div>
+    <!-- Paste Carbon Ads / EthicalAds / AdSense snippet below. Keep it within this container. -->
+  </div>
+</div>

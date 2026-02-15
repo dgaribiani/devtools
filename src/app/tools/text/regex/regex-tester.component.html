@@ -1,0 +1,47 @@
+﻿<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">Regex Tester</div>
+      <div class="tool-subtitle">Test patterns, inspect groups, and highlight matches.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="run()">
+        <mat-icon>play_arrow</mat-icon>
+        Run
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-panel glass-card">
+    <div class="regex-inputs">
+      <mat-form-field appearance="outline">
+        <mat-label>Pattern</mat-label>
+        <input matInput [(ngModel)]="pattern" placeholder="(\\w+)" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Flags</mat-label>
+        <input matInput [(ngModel)]="flags" placeholder="gim" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">text_snippet</span>Test Text</div>
+      <app-editor [value]="text" (valueChange)="text = $event" [language]="'text'" height="260px"></app-editor>
+    </div>
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">find_in_page</span>Matches</div>
+      <div class="match-output" [innerHTML]="highlightHtml"></div>
+      <div class="match-list" *ngIf="matches.length">
+        <div class="match-row" *ngFor="let match of matches; index as i">
+          <div class="match-index">#{{ i + 1 }} @ {{ match.index }}</div>
+          <div class="match-value">{{ match.match }}</div>
+          <div class="match-groups" *ngIf="match.groups.length">Groups: {{ match.groups.join(', ') }}</div>
+        </div>
+      </div>
+      <div class="muted" *ngIf="!matches.length">No matches yet.</div>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+  </div>
+</div>

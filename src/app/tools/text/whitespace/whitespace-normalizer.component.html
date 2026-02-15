@@ -1,0 +1,50 @@
+<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">Whitespace Normalizer</div>
+      <div class="tool-subtitle">Trim, convert tabs, and normalize line endings.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="normalize()">
+        <mat-icon>format_clear</mat-icon>
+        Normalize
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">tune</span>Options</div>
+      <div class="options">
+        <mat-form-field appearance="outline">
+          <mat-label>Line endings</mat-label>
+          <mat-select [(ngModel)]="options.lineEnding">
+            <mat-option value="preserve">Preserve</mat-option>
+            <mat-option value="lf">LF (\n)</mat-option>
+            <mat-option value="crlf">CRLF (\r\n)</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-slide-toggle [(ngModel)]="options.trimTrailing">Trim trailing spaces</mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="options.trimLeading">Trim leading spaces</mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="options.trimLines">Trim entire lines</mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="options.tabsToSpaces">Tabs ? spaces</mat-slide-toggle>
+        <mat-form-field appearance="outline" class="tab-field">
+          <mat-label>Tab size</mat-label>
+          <input matInput type="number" min="1" max="8" [(ngModel)]="options.tabSize">
+        </mat-form-field>
+      </div>
+      <div class="chip"><span class="material-icons">edit</span>Input</div>
+      <app-editor [value]="input" (valueChange)="input = $event" [language]="'text'" height="240px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">task</span>Output</div>
+      <app-result-panel
+        [value]="output"
+        [language]="'text'"
+        filename="normalized.txt"
+        emptyHint="Normalize to see output."></app-result-panel>
+    </div>
+  </div>
+</div>

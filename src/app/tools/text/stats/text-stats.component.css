@@ -1,0 +1,41 @@
+﻿.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.stat {
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(47, 215, 255, 0.1);
+}
+
+.label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.value {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.line-endings {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.ending {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.55);
+  font-family: "Space Mono", monospace;
+}
+
+html.theme-dark .ending {
+  background: rgba(15, 23, 42, 0.55);
+}

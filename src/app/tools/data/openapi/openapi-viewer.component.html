@@ -1,0 +1,98 @@
+<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">OpenAPI Snippet Viewer</div>
+      <div class="tool-subtitle">Paste a spec and browse endpoints by path and method.</div>
+    </div>
+    <div class="tool-actions">
+      <mat-form-field appearance="outline" class="base-url">
+        <mat-label>Base URL</mat-label>
+        <input matInput [(ngModel)]="baseUrl" (ngModelChange)="onParamsChange()" placeholder="https://api.example.com">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button" (click)="parse()">
+        <mat-icon>travel_explore</mat-icon>
+        Parse
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">code</span>OpenAPI Spec</div>
+      <app-editor [value]="input" (valueChange)="input = $event" [language]="'yaml'" height="320px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">search</span>Endpoints</div>
+      <mat-form-field appearance="outline">
+        <mat-label>Filter</mat-label>
+        <input matInput [(ngModel)]="filter" placeholder="Search paths, tags, methods">
+      </mat-form-field>
+      <div class="list" *ngIf="filtered.length; else empty">
+        <button
+          class="endpoint"
+          *ngFor="let op of filtered"
+          (click)="select(op)"
+          [class.active]="op === selected">
+          <span class="method">{{ op.method }}</span>
+          <span class="path">{{ op.path }}</span>
+          <span class="summary">{{ op.summary }}</span>
+        </button>
+      </div>
+      <ng-template #empty>
+        <div class="muted">Parse a spec to see endpoints.</div>
+      </ng-template>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">info</span>Details</div>
+      <div *ngIf="selected as op; else selectHint">
+        <div class="detail"><strong>Method:</strong> {{ op.method }}</div>
+        <div class="detail"><strong>Path:</strong> {{ op.path }}</div>
+        <div class="detail"><strong>Summary:</strong> {{ op.summary }}</div>
+        <div class="detail" *ngIf="op.operationId"><strong>Operation ID:</strong> {{ op.operationId }}</div>
+        <div class="detail" *ngIf="op.tags.length"><strong>Tags:</strong> {{ op.tags.join(', ') }}</div>
+        <div class="detail" *ngIf="op.description"><strong>Description:</strong> {{ op.description }}</div>
+        <div class="detail" *ngIf="op.requestContentType">
+          <strong>Request body:</strong> {{ op.requestContentType }}
+        </div>
+        <div class="params" *ngIf="op.pathParams.length">
+          <div class="chip"><span class="material-icons">route</span>Path Params</div>
+          <div class="params-grid">
+            <mat-form-field appearance="outline" *ngFor="let param of op.pathParams">
+              <mat-label>{{ param }}</mat-label>
+              <input
+                matInput
+                [(ngModel)]="pathParamValues[param]"
+                (ngModelChange)="onParamsChange()"
+                placeholder="{{ param }}">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="request-body" *ngIf="op.requestExample; else noBody">
+          <div class="chip"><span class="material-icons">data_object</span>Example Body</div>
+          <app-editor
+            [value]="bodyOverride || op.requestExample"
+            (valueChange)="bodyOverride = $event; onParamsChange()"
+            [language]="'json'"
+            height="220px"></app-editor>
+        </div>
+        <ng-template #noBody>
+          <div class="muted">No request body example found for this operation.</div>
+        </ng-template>
+        <div class="request-body">
+          <div class="chip"><span class="material-icons">terminal</span>cURL</div>
+          <app-result-panel
+            [value]="curlOutput"
+            [language]="'text'"
+            filename="request.sh"
+            emptyHint="Select an endpoint to build cURL."></app-result-panel>
+        </div>
+      </div>
+      <ng-template #selectHint>
+        <div class="muted">Select an endpoint to see details.</div>
+      </ng-template>
+    </div>
+  </div>
+</div>

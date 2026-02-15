@@ -1,0 +1,30 @@
+﻿.privacy-page {
+  margin: 18px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.privacy-header {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.privacy-header h1 {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+section h2 {
+  margin-bottom: 8px;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+section ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+}

@@ -1,0 +1,99 @@
+﻿.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.summary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.summary-card {
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(47, 215, 255, 0.08);
+}
+
+.summary-value {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.diff-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 260px;
+  overflow: auto;
+}
+
+.top-paths {
+  margin-top: 10px;
+  display: grid;
+  gap: 6px;
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+}
+
+.top-path {
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: rgba(47, 215, 255, 0.12);
+}
+
+.diff-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+html.theme-dark .diff-item {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.diff-type {
+  text-transform: uppercase;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(47, 215, 255, 0.2);
+}
+
+.diff-type.added {
+  background: rgba(72, 255, 194, 0.2);
+}
+
+.diff-type.removed {
+  background: rgba(255, 107, 107, 0.2);
+}
+
+.diff-type.changed {
+  background: rgba(255, 201, 71, 0.2);
+}
+
+.diff-path {
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+}
+
+.error {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 107, 107, 0.12);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  font-size: 12px;
+}

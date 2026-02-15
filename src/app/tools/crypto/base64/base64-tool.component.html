@@ -1,0 +1,36 @@
+﻿<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">Base64 Encode / Decode</div>
+      <div class="tool-subtitle">Convert text or files to Base64 safely in-browser.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-stroked-button type="button" (click)="decode()">
+        <mat-icon>south_west</mat-icon>
+        Decode
+      </button>
+      <button mat-raised-button color="primary" type="button" (click)="encode()">
+        <mat-icon>north_east</mat-icon>
+        Encode
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">text_fields</span>Text Input</div>
+      <app-editor [value]="input" (valueChange)="input = $event" [language]="'text'" height="240px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">task</span>Result</div>
+      <app-result-panel [value]="output" [language]="'text'" filename="base64.txt" emptyHint="Encode or decode to see output."></app-result-panel>
+    </div>
+  </div>
+
+  <div class="tool-panel glass-card">
+    <div class="chip"><span class="material-icons">attach_file</span>File to Base64</div>
+    <input type="file" (change)="onFileSelected($event)" />
+    <app-result-panel [value]="fileOutput" [language]="'text'" filename="file-base64.txt" emptyHint="Select a file to convert."></app-result-panel>
+  </div>
+</div>

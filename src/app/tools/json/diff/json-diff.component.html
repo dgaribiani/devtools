@@ -1,0 +1,90 @@
+﻿<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">JSON Diff (Tree)</div>
+      <div class="tool-subtitle">Structural comparison with ignore rules and semantic matching.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="run()">
+        <mat-icon>compare_arrows</mat-icon>
+        Compare
+      </button>
+    </div>
+  </div>
+
+  <div class="diff-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">code</span>Left JSON</div>
+      <app-editor [value]="left" (valueChange)="left = $event" [language]="'json'" height="320px"></app-editor>
+    </div>
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">code</span>Right JSON</div>
+      <app-editor [value]="right" (valueChange)="right = $event" [language]="'json'" height="320px"></app-editor>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">tune</span>Diff Options</div>
+      <mat-form-field appearance="outline">
+        <mat-label>Ignore paths (comma or newline)</mat-label>
+        <textarea matInput rows="3" [(ngModel)]="ignorePaths"></textarea>
+      </mat-form-field>
+      <mat-slide-toggle [(ngModel)]="ignoreNullVsMissing">Ignore null vs missing</mat-slide-toggle>
+      <mat-form-field appearance="outline">
+        <mat-label>Numeric tolerance (epsilon)</mat-label>
+        <input matInput type="number" [(ngModel)]="numericTolerance" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Array match path (optional)</mat-label>
+        <input matInput [(ngModel)]="arrayMatchPath" placeholder="$.items" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Array match key (optional)</mat-label>
+        <input matInput [(ngModel)]="arrayMatchKey" placeholder="id" />
+      </mat-form-field>
+      <div class="muted">Example ignore path: <code>$.meta.*</code> or <code>$.audit.timestamp</code></div>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="summary-header">
+        <div class="chip"><span class="material-icons">analytics</span>Diff Summary</div>
+        <app-toolbar-buttons [text]="diffText" filename="json-diff.json"></app-toolbar-buttons>
+      </div>
+      <ng-container *ngIf="result as diff; else empty">
+        <div class="summary">
+          <div class="summary-card">
+            <div class="summary-value">{{ diff.summary.added }}</div>
+            <div class="muted">Added</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-value">{{ diff.summary.removed }}</div>
+            <div class="muted">Removed</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-value">{{ diff.summary.changed }}</div>
+            <div class="muted">Changed</div>
+          </div>
+        </div>
+
+        <div class="top-paths" *ngIf="diff.summary.topPaths.length">
+          <div class="muted">Top changed paths</div>
+          <div class="top-path" *ngFor="let path of diff.summary.topPaths">{{ path }}</div>
+        </div>
+
+        <div class="diff-list app-scrollbar">
+          <div class="diff-item" *ngFor="let change of diff.changes">
+            <span class="diff-type" [class.added]="change.type === 'added'" [class.removed]="change.type === 'removed'" [class.changed]="change.type === 'changed'">
+              {{ change.type }}
+            </span>
+            <div class="diff-path">{{ change.path }}</div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #empty>
+        <div class="muted">Run diff to see changes.</div>
+      </ng-template>
+    </div>
+  </div>
+</div>

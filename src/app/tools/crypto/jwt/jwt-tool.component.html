@@ -1,0 +1,33 @@
+﻿<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">JWT Decoder</div>
+      <div class="tool-subtitle">Decode header and payload only. Signature is not verified.</div>
+    </div>
+    <div class="tool-actions">
+      <span class="chip"><span class="material-icons">lock_open</span>Decode only</span>
+      <button mat-raised-button color="primary" type="button" (click)="decode()">
+        <mat-icon>lock_open</mat-icon>
+        Decode
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-panel glass-card">
+    <div class="chip"><span class="material-icons">key</span>JWT Token</div>
+    <app-editor [value]="token" (valueChange)="token = $event" [language]="'text'" height="200px"></app-editor>
+    <div class="warning">Decode only, does not verify signature.</div>
+    <div class="error" *ngIf="error">{{ error }}</div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">description</span>Header</div>
+      <app-result-panel [value]="header" [language]="'json'" filename="jwt-header.json" emptyHint="Decode to see header."></app-result-panel>
+    </div>
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">data_object</span>Payload</div>
+      <app-result-panel [value]="payload" [language]="'json'" filename="jwt-payload.json" emptyHint="Decode to see payload."></app-result-panel>
+    </div>
+  </div>
+</div>

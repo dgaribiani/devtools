@@ -1,0 +1,39 @@
+<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">SQL Identifier Escaper</div>
+      <div class="tool-subtitle">Wrap identifiers with the correct quoting style.</div>
+    </div>
+    <div class="tool-actions">
+      <mat-form-field appearance="outline">
+        <mat-label>Style</mat-label>
+        <mat-select [(ngModel)]="style">
+          <mat-option value="ansi">ANSI ("name")</mat-option>
+          <mat-option value="mysql">MySQL (`name`)</mat-option>
+          <mat-option value="sqlserver">SQL Server ([name])</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button" (click)="escape()">
+        <mat-icon>title</mat-icon>
+        Escape
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">edit</span>Identifiers</div>
+      <app-editor [value]="input" (valueChange)="input = $event" [language]="'text'" height="220px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">task</span>Escaped Output</div>
+      <app-result-panel
+        [value]="output"
+        [language]="'text'"
+        filename="identifiers.sql"
+        emptyHint="Escape to see output."></app-result-panel>
+    </div>
+  </div>
+</div>

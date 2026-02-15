@@ -1,0 +1,46 @@
+<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">SQL Formatter / Minifier</div>
+      <div class="tool-subtitle">Pretty-print SQL or compress it for compact output.</div>
+    </div>
+    <div class="tool-actions">
+      <mat-form-field appearance="outline">
+        <mat-label>Dialect</mat-label>
+        <mat-select [(ngModel)]="dialect">
+          <mat-option value="sql">Generic</mat-option>
+          <mat-option value="postgresql">PostgreSQL</mat-option>
+          <mat-option value="mysql">MySQL</mat-option>
+          <mat-option value="sqlite">SQLite</mat-option>
+          <mat-option value="mariadb">MariaDB</mat-option>
+          <mat-option value="transactsql">SQL Server</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button" (click)="format()">
+        <mat-icon>format_align_left</mat-icon>
+        Format
+      </button>
+      <button mat-raised-button color="accent" type="button" (click)="minify()">
+        <mat-icon>compress</mat-icon>
+        Minify
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">code</span>Input SQL</div>
+      <app-editor [value]="input" (valueChange)="input = $event" [language]="'text'" height="260px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">task</span>Output</div>
+      <app-result-panel
+        [value]="output"
+        [language]="'text'"
+        filename="query.sql"
+        emptyHint="Format or minify to see output."></app-result-panel>
+    </div>
+  </div>
+</div>

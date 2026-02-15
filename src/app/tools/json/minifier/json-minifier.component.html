@@ -1,0 +1,26 @@
+﻿<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">JSON Minifier</div>
+      <div class="tool-subtitle">Compress JSON to a single line for compact payloads.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="run()">
+        <mat-icon>unfold_less</mat-icon>
+        Minify
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">code</span>Input JSON</div>
+      <app-editor [value]="input" (valueChange)="input = $event" [language]="'json'" height="320px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">task</span>Minified Output</div>
+      <app-result-panel [value]="output" [language]="'json'" filename="minified.json"></app-result-panel>
+    </div>
+  </div>
+</div>

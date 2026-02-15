@@ -1,0 +1,52 @@
+.node {
+  border-left: 2px solid rgba(47, 215, 255, 0.3);
+  padding-left: 12px;
+  margin-top: 8px;
+}
+
+.node-header {
+  background: rgba(47, 215, 255, 0.12);
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 8px;
+}
+
+.toggle {
+  border: none;
+  background: rgba(47, 215, 255, 0.2);
+  border-radius: 8px;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.toggle .material-icons {
+  font-size: 18px;
+}
+
+.node-title {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.node-detail {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.node-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 11px;
+  margin-top: 6px;
+}
+
+.node-children {
+  margin-top: 6px;
+}

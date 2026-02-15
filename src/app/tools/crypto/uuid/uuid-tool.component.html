@@ -1,0 +1,26 @@
+﻿<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">UUID Generator</div>
+      <div class="tool-subtitle">Generate UUIDv4 identifiers instantly.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="generate()">
+        <mat-icon>auto_awesome</mat-icon>
+        Generate
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-panel glass-card">
+    <mat-form-field appearance="outline">
+      <mat-label>Count</mat-label>
+      <input matInput type="number" min="1" max="10" [(ngModel)]="count" />
+    </mat-form-field>
+  </div>
+
+  <div class="tool-panel glass-card">
+    <div class="chip"><span class="material-icons">tag</span>UUIDs</div>
+    <app-result-panel [value]="output" [language]="'text'" filename="uuids.txt" emptyHint="Generate to see UUIDs."></app-result-panel>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+.options {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-bottom: 12px;
+}
+
+.delimiter-field {
+  max-width: 200px;
+}
+
+.summary {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.table-header,
+.table-row {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(80px, 1fr));
+  gap: 8px;
+  align-items: center;
+}
+
+.table-header {
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.table-row {
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: rgba(47, 215, 255, 0.12);
+}
+
+.error {
+  color: #f97316;
+  font-size: 12px;
+}

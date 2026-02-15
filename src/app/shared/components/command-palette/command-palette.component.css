@@ -1,0 +1,84 @@
+﻿.palette-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 10, 22, 0.5);
+  display: grid;
+  place-items: start center;
+  padding-top: 120px;
+  z-index: 9990;
+  backdrop-filter: blur(10px);
+}
+
+.palette-card {
+  width: min(640px, 92vw);
+  padding: 18px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.palette-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+html.theme-dark .palette-header {
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.palette-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  color: inherit;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+.hint {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(47, 215, 255, 0.18);
+}
+
+.palette-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 360px;
+  overflow: auto;
+}
+
+.palette-item {
+  text-align: left;
+  border: none;
+  background: transparent;
+  padding: 12px 14px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.palette-item:hover {
+  background: rgba(47, 215, 255, 0.15);
+}
+
+.palette-title {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.palette-desc {
+  font-size: 13px;
+}
+
+.palette-empty {
+  padding: 12px;
+}

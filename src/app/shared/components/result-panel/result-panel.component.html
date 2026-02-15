@@ -1,0 +1,15 @@
+﻿<div class="result-panel">
+  <div class="result-header">
+    <div class="title">
+      <span class="material-icons">task_alt</span>
+      <span>{{ title }}</span>
+    </div>
+    <app-toolbar-buttons [text]="value" [filename]="filename"></app-toolbar-buttons>
+  </div>
+  <div class="result-body">
+    <app-editor *ngIf="value; else empty" [value]="value" [language]="language" [readonly]="true" height="240px"></app-editor>
+    <ng-template #empty>
+      <div class="empty muted">{{ emptyHint }}</div>
+    </ng-template>
+  </div>
+</div>

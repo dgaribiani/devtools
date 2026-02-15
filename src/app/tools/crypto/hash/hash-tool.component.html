@@ -1,0 +1,36 @@
+﻿<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">Hash Generator</div>
+      <div class="tool-subtitle">Generate SHA hashes locally using Web Crypto.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="run()">
+        <mat-icon>fingerprint</mat-icon>
+        Hash
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-panel glass-card">
+    <mat-form-field appearance="outline">
+      <mat-label>Algorithm</mat-label>
+      <mat-select [(ngModel)]="algorithm">
+        <mat-option value="SHA-256">SHA-256</mat-option>
+        <mat-option value="SHA-1">SHA-1</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">text_fields</span>Input</div>
+      <app-editor [value]="input" (valueChange)="input = $event" [language]="'text'" height="220px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">task</span>Hash Output</div>
+      <app-result-panel [value]="output" [language]="'text'" filename="hash.txt" emptyHint="Generate a hash to see output."></app-result-panel>
+    </div>
+  </div>
+</div>

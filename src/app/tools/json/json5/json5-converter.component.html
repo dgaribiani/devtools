@@ -1,0 +1,39 @@
+<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">JSON5 / JSONC ? JSON</div>
+      <div class="tool-subtitle">Parse JSON with comments and trailing commas, output strict JSON.</div>
+    </div>
+    <div class="tool-actions">
+      <mat-form-field appearance="outline">
+        <mat-label>Indent</mat-label>
+        <mat-select [(ngModel)]="indent">
+          <mat-option [value]="2">2 spaces</mat-option>
+          <mat-option [value]="4">4 spaces</mat-option>
+          <mat-option [value]="8">8 spaces</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button" (click)="convert()">
+        <mat-icon>transform</mat-icon>
+        Convert
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">code</span>JSON5 / JSONC Input</div>
+      <app-editor [value]="input" (valueChange)="input = $event" [language]="'javascript'" height="320px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">task</span>Strict JSON</div>
+      <app-result-panel
+        [value]="output"
+        [language]="'json'"
+        filename="converted.json"
+        emptyHint="Convert to see output."></app-result-panel>
+    </div>
+  </div>
+</div>

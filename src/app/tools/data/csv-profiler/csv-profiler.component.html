@@ -1,0 +1,67 @@
+<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">CSV Profiler</div>
+      <div class="tool-subtitle">Analyze columns, missing values, and basic stats.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="profile()">
+        <mat-icon>analytics</mat-icon>
+        Profile
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">tune</span>Options</div>
+      <div class="options">
+        <mat-form-field appearance="outline" class="delimiter-field">
+          <mat-label>Delimiter (blank = auto)</mat-label>
+          <input matInput [(ngModel)]="delimiter" placeholder=",">
+        </mat-form-field>
+        <mat-slide-toggle [(ngModel)]="header">First row is header</mat-slide-toggle>
+      </div>
+      <div class="chip"><span class="material-icons">table_view</span>CSV Input</div>
+      <app-editor [value]="input" (valueChange)="input = $event" [language]="'text'" height="240px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">task</span>Profile Summary</div>
+      <div class="summary" *ngIf="result">
+        <div><strong>Rows:</strong> {{ result.rows }}</div>
+        <div><strong>Columns:</strong> {{ result.columns }}</div>
+        <div><strong>Delimiter:</strong> {{ result.delimiter }}</div>
+      </div>
+      <div class="chip"><span class="material-icons">view_list</span>Columns</div>
+      <div class="table" *ngIf="result; else empty">
+        <div class="table-header">
+          <div>Name</div>
+          <div>Empty</div>
+          <div>Unique</div>
+          <div>Min</div>
+          <div>Max</div>
+          <div>Avg</div>
+        </div>
+        <div class="table-row" *ngFor="let col of result.columnProfiles">
+          <div>{{ col.name }}</div>
+          <div>{{ col.empty }}</div>
+          <div>{{ col.unique }}</div>
+          <div>{{ col.minLength }}</div>
+          <div>{{ col.maxLength }}</div>
+          <div>{{ col.avgLength }}</div>
+        </div>
+      </div>
+      <ng-template #empty>
+        <div class="muted">Run the profiler to see stats.</div>
+      </ng-template>
+      <div class="chip"><span class="material-icons">code</span>JSON Output</div>
+      <app-result-panel
+        [value]="output"
+        [language]="'json'"
+        filename="csv-profile.json"
+        emptyHint="Run the profiler to see output."></app-result-panel>
+    </div>
+  </div>
+</div>

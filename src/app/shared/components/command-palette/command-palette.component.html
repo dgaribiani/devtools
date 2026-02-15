@@ -1,0 +1,25 @@
+﻿<div class="palette-backdrop" *ngIf="open" (click)="close.emit()">
+  <div class="palette-card glass-card" (click)="$event.stopPropagation()">
+    <div class="palette-header">
+      <mat-icon>search</mat-icon>
+      <input
+        class="palette-input"
+        type="text"
+        placeholder="Search tools"
+        [(ngModel)]="query"
+        aria-label="Search tools" />
+      <span class="hint">Ctrl/Cmd+K</span>
+    </div>
+    <div class="palette-list app-scrollbar">
+      <button
+        class="palette-item"
+        *ngFor="let tool of tools"
+        type="button"
+        (click)="select(tool)">
+        <div class="palette-title">{{ tool.label }}</div>
+        <div class="palette-desc muted">{{ tool.description }}</div>
+      </button>
+      <div class="palette-empty muted" *ngIf="tools.length === 0">No matching tools.</div>
+    </div>
+  </div>
+</div>

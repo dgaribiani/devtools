@@ -1,0 +1,37 @@
+﻿<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">Text Diff</div>
+      <div class="tool-subtitle">Line-level diff with clear highlights.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="run()">
+        <mat-icon>compare_arrows</mat-icon>
+        Compare
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">notes</span>Left Text</div>
+      <app-editor [value]="left" (valueChange)="left = $event" [language]="'text'" height="280px"></app-editor>
+    </div>
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">notes</span>Right Text</div>
+      <app-editor [value]="right" (valueChange)="right = $event" [language]="'text'" height="280px"></app-editor>
+    </div>
+  </div>
+
+  <div class="tool-panel glass-card">
+    <div class="diff-header">
+      <div class="chip"><span class="material-icons">analytics</span>Diff Output</div>
+      <app-toolbar-buttons [text]="diffText" filename="text-diff.txt"></app-toolbar-buttons>
+    </div>
+    <div class="summary">
+      <div><strong>{{ summary.added }}</strong> added blocks</div>
+      <div><strong>{{ summary.removed }}</strong> removed blocks</div>
+    </div>
+    <div class="diff-output" [innerHTML]="diffHtml"></div>
+  </div>
+</div>

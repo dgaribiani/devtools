@@ -1,0 +1,52 @@
+<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">HMAC Generator</div>
+      <div class="tool-subtitle">Generate HMAC signatures using Web Crypto.</div>
+    </div>
+    <div class="tool-actions">
+      <mat-form-field appearance="outline">
+        <mat-label>Algorithm</mat-label>
+        <mat-select [(ngModel)]="algorithm">
+          <mat-option value="SHA-256">SHA-256</mat-option>
+          <mat-option value="SHA-512">SHA-512</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Output</mat-label>
+        <mat-select [(ngModel)]="outputFormat">
+          <mat-option value="hex">Hex</mat-option>
+          <mat-option value="base64">Base64</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button" (click)="generate()">
+        <mat-icon>vpn_key</mat-icon>
+        Generate
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">edit</span>Inputs</div>
+      <mat-form-field appearance="outline">
+        <mat-label>Secret</mat-label>
+        <input matInput [(ngModel)]="secret" type="text" placeholder="Secret key">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Message</mat-label>
+        <textarea matInput [(ngModel)]="message" rows="4"></textarea>
+      </mat-form-field>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">task</span>HMAC Output</div>
+      <app-result-panel
+        [value]="output"
+        [language]="'text'"
+        filename="hmac.txt"
+        emptyHint="Generate to see output."></app-result-panel>
+    </div>
+  </div>
+</div>

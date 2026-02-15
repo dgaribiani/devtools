@@ -1,0 +1,44 @@
+<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">SQL IN Clause Builder</div>
+      <div class="tool-subtitle">Turn a list of values into a SQL IN clause.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="build()">
+        <mat-icon>list</mat-icon>
+        Build
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">tune</span>Options</div>
+      <div class="options">
+        <mat-form-field appearance="outline">
+          <mat-label>Quote</mat-label>
+          <mat-select [(ngModel)]="options.quote">
+            <mat-option value="none">None</mat-option>
+            <mat-option value="single">Single</mat-option>
+            <mat-option value="double">Double</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-slide-toggle [(ngModel)]="options.unique">Unique</mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="options.multiline">Multiline</mat-slide-toggle>
+      </div>
+      <div class="chip"><span class="material-icons">edit</span>Values</div>
+      <app-editor [value]="input" (valueChange)="input = $event" [language]="'text'" height="220px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">task</span>IN Clause</div>
+      <app-result-panel
+        [value]="output"
+        [language]="'text'"
+        filename="in-clause.sql"
+        emptyHint="Build to see output."></app-result-panel>
+    </div>
+  </div>
+</div>

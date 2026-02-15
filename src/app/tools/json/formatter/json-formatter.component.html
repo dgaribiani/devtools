@@ -1,0 +1,47 @@
+﻿<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">JSON Formatter / Validator</div>
+      <div class="tool-subtitle">Validate JSON, surface errors, and pretty print with custom indentation.</div>
+    </div>
+    <div class="tool-actions">
+      <mat-form-field appearance="outline">
+        <mat-label>Indent</mat-label>
+        <mat-select [(ngModel)]="indent">
+          <mat-option [value]="2">2 spaces</mat-option>
+          <mat-option [value]="4">4 spaces</mat-option>
+          <mat-option [value]="8">8 spaces</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button" (click)="run()">
+        <mat-icon>auto_fix_high</mat-icon>
+        Format
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">code</span>Input JSON</div>
+      <app-editor
+        [value]="input"
+        (valueChange)="input = $event"
+        [language]="'json'"
+        [highlightPosition]="errorPosition"
+        height="320px"></app-editor>
+      <div class="error" *ngIf="error">
+        <strong>Error:</strong> {{ error }}
+        <span *ngIf="errorLine">(Line {{ errorLine }}, Column {{ errorColumn }})</span>
+      </div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">task</span>Formatted Output</div>
+      <app-result-panel
+        [value]="output"
+        [language]="'json'"
+        filename="formatted.json"
+        emptyHint="Run formatter to see output."></app-result-panel>
+    </div>
+  </div>
+</div>

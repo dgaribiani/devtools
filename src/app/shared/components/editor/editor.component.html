@@ -1,0 +1,9 @@
+﻿<div class="editor-shell">
+  <div #editorHost class="editor-host app-scrollbar hidden-host" aria-hidden="true"></div>
+  <textarea
+    class="plain-textarea"
+    [value]="value"
+    (input)="onPlainInput($event)"
+    [readOnly]="readonly"
+    aria-label="Plain text editor"></textarea>
+</div>

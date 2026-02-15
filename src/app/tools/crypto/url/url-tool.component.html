@@ -1,0 +1,30 @@
+﻿<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">URL Encode / Decode</div>
+      <div class="tool-subtitle">Safely escape or unescape URL strings.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-stroked-button type="button" (click)="decode()">
+        <mat-icon>south_west</mat-icon>
+        Decode
+      </button>
+      <button mat-raised-button color="primary" type="button" (click)="encode()">
+        <mat-icon>north_east</mat-icon>
+        Encode
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">link</span>Input</div>
+      <app-editor [value]="input" (valueChange)="input = $event" [language]="'text'" height="200px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">task</span>Output</div>
+      <app-result-panel [value]="output" [language]="'text'" filename="url-output.txt"></app-result-panel>
+    </div>
+  </div>
+</div>

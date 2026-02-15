@@ -1,0 +1,47 @@
+﻿.result {
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.result.success {
+  background: rgba(72, 255, 194, 0.15);
+}
+
+.result.error {
+  background: rgba(255, 107, 107, 0.15);
+}
+
+.error {
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255, 107, 107, 0.12);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+  font-size: 12px;
+}
+
+.errors {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.error-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 10px;
+  font-size: 13px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+html.theme-dark .error-row {
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.path {
+  font-family: "Space Mono", monospace;
+}

@@ -1,0 +1,35 @@
+﻿<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">JSONPath Evaluator</div>
+      <div class="tool-subtitle">Run JSONPath queries and inspect the matches instantly.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="run()">
+        <mat-icon>play_arrow</mat-icon>
+        Run
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-panel glass-card">
+    <mat-form-field appearance="outline">
+      <mat-label>JSONPath</mat-label>
+      <input matInput [(ngModel)]="path" />
+    </mat-form-field>
+    <div class="muted">Example: <code>$.store.book[*].title</code></div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">code</span>JSON</div>
+      <app-editor [value]="jsonInput" (valueChange)="jsonInput = $event" [language]="'json'" height="300px"></app-editor>
+    </div>
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">search</span>Matches</div>
+      <app-result-panel [value]="output" [language]="'json'" filename="jsonpath.json" emptyHint="Run JSONPath to see results."></app-result-panel>
+    </div>
+  </div>
+
+  <div class="error" *ngIf="error">{{ error }}</div>
+</div>

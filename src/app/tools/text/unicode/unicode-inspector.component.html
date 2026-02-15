@@ -1,0 +1,45 @@
+<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">Unicode Inspector</div>
+      <div class="tool-subtitle">See code points, hex, and UTF-16 units per character.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-raised-button color="primary" type="button" (click)="inspect()">
+        <mat-icon>search</mat-icon>
+        Inspect
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">text_fields</span>Input</div>
+      <app-editor [value]="input" (valueChange)="input = $event" [language]="'text'" height="220px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">table_chart</span>Characters</div>
+      <div class="table" *ngIf="rows.length; else empty">
+        <div class="table-header">
+          <div>#</div>
+          <div>Char</div>
+          <div>Code Point</div>
+          <div>Hex</div>
+          <div>UTF-16</div>
+        </div>
+        <div class="table-row" *ngFor="let row of rows">
+          <div>{{ row.index }}</div>
+          <div class="char">{{ row.char }}</div>
+          <div>{{ row.codePoint }}</div>
+          <div>{{ row.hex }}</div>
+          <div>{{ row.utf16 }}</div>
+        </div>
+      </div>
+      <ng-template #empty>
+        <div class="muted">Inspect text to see Unicode details.</div>
+      </ng-template>
+    </div>
+  </div>
+</div>

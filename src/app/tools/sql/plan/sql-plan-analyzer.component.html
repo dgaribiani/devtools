@@ -1,0 +1,76 @@
+<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">Execution Plan Analyzer</div>
+      <div class="tool-subtitle">Parse plans from different engines and highlight key metrics.</div>
+    </div>
+    <div class="tool-actions">
+      <mat-form-field appearance="outline">
+        <mat-label>Engine</mat-label>
+        <mat-select [(ngModel)]="engine" (selectionChange)="onEngineChange()">
+          <mat-option value="postgres">PostgreSQL (JSON)</mat-option>
+          <mat-option value="mysql">MySQL (JSON)</mat-option>
+          <mat-option value="sqlserver">SQL Server (.sqlplan XML)</mat-option>
+          <mat-option value="sqlite">SQLite (text)</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="button" (click)="analyze()">
+        <mat-icon>analytics</mat-icon>
+        Analyze
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">code</span>Execution Plan Input</div>
+      <app-editor [value]="input" (valueChange)="input = $event" [language]="'text'" height="320px"></app-editor>
+      <div class="error" *ngIf="error">{{ error }}</div>
+    </div>
+
+    <div class="tool-panel glass-card">
+      <div class="chip"><span class="material-icons">summarize</span>Summary</div>
+      <div *ngIf="result as res; else empty">
+        <div class="summary">Engine: {{ res.summary.engine }}</div>
+        <div class="summary">Nodes: {{ res.summary.nodeCount }}</div>
+        <div class="summary" *ngIf="res.summary.totalCost">Total cost: {{ res.summary.totalCost }}</div>
+        <div class="summary" *ngIf="res.summary.actualTime">Actual time: {{ res.summary.actualTime }} ms</div>
+        <div class="summary" *ngIf="res.summary.actualRows">Actual rows: {{ res.summary.actualRows }}</div>
+        <div class="notes" *ngIf="res.summary.notes.length">
+          <div class="note" *ngFor="let note of res.summary.notes">{{ note }}</div>
+        </div>
+      </div>
+      <ng-template #empty>
+        <div class="muted">Analyze a plan to see summary metrics.</div>
+      </ng-template>
+      <div class="chip"><span class="material-icons">account_tree</span>Plan Tree</div>
+      <div class="tree" *ngIf="result?.root as root; else emptyTree">
+        <div class="tree-layout">
+          <div class="tree-main">
+            <app-plan-node [node]="root" [depth]="0"></app-plan-node>
+          </div>
+          <div class="tree-mini">
+            <div class="mini-title">Overview</div>
+            <svg
+              class="mini-map"
+              [attr.height]="miniMapHeight"
+              [attr.viewBox]="'0 0 120 ' + miniMapHeight">
+              <rect
+                *ngFor="let node of flatNodes"
+                [attr.x]="node.depth * 12"
+                [attr.y]="node.index * 6"
+                width="6"
+                height="4"
+                rx="2"
+                ry="2"></rect>
+            </svg>
+            <div class="mini-note muted" *ngIf="flatTruncated">Overview truncated for performance.</div>
+          </div>
+        </div>
+      </div>
+      <ng-template #emptyTree>
+        <div class="muted">Plan tree will appear here.</div>
+      </ng-template>
+    </div>
+  </div>
+</div>

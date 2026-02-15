@@ -1,0 +1,14 @@
+﻿.toolbar-buttons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+button[mat-icon-button] {
+  border-radius: 12px;
+  background: rgba(47, 215, 255, 0.08);
+}
+
+html.theme-dark button[mat-icon-button] {
+  background: rgba(47, 215, 255, 0.12);
+}

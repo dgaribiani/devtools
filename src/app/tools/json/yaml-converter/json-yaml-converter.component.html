@@ -1,0 +1,37 @@
+﻿<div class="tool-page">
+  <div class="tool-header">
+    <div>
+      <div class="tool-title">JSON <-> YAML Converter</div>
+      <div class="tool-subtitle">Switch between JSON and YAML with clean formatting.</div>
+    </div>
+    <div class="tool-actions">
+      <button mat-stroked-button type="button" (click)="toJson()">
+        <mat-icon>sync_alt</mat-icon>
+        YAML → JSON
+      </button>
+      <button mat-raised-button color="primary" type="button" (click)="toYaml()">
+        <mat-icon>sync_alt</mat-icon>
+        JSON → YAML
+      </button>
+    </div>
+  </div>
+
+  <div class="tool-grid">
+    <div class="tool-panel glass-card">
+      <div class="panel-header">
+        <div class="chip"><span class="material-icons">code</span>JSON</div>
+        <app-toolbar-buttons [text]="jsonInput" filename="data.json"></app-toolbar-buttons>
+      </div>
+      <app-editor [value]="jsonInput" (valueChange)="jsonInput = $event" [language]="'json'" height="320px"></app-editor>
+    </div>
+    <div class="tool-panel glass-card">
+      <div class="panel-header">
+        <div class="chip"><span class="material-icons">text_snippet</span>YAML</div>
+        <app-toolbar-buttons [text]="yamlInput" filename="data.yaml"></app-toolbar-buttons>
+      </div>
+      <app-editor [value]="yamlInput" (valueChange)="yamlInput = $event" [language]="'yaml'" height="320px"></app-editor>
+    </div>
+  </div>
+
+  <div class="error" *ngIf="error">{{ error }}</div>
+</div>
